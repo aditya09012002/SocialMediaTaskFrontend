@@ -42,6 +42,11 @@ const RegisterComponent = ({ changeTab }: RegisterComponentProps) => {
       return;
     }
 
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long.");
+      return;
+    }
+
     const data = {
       username,
       email,
