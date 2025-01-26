@@ -25,14 +25,11 @@ export const PaginatedTable: React.FC<PaginatedTableProps> = ({
   setCurrentPage,
   pageSize,
 }) => {
-  const startIndex = (currentPage - 1) * pageSize;
-  const paginatedData = data.slice(startIndex, startIndex + pageSize);
-
-  if (paginatedData.length <= 0)
+  if (data.length <= 0)
     return (
       <div className="text-center text-2xl items-center text-gray-500 py-4 flex gap-2 justify-center">
         <span>
-          <Frown size="100px"  className="text-red-600"/>
+          <Frown size="100px" className="text-red-600" />
         </span>
         <span>No Entries</span>
       </div>
@@ -51,7 +48,7 @@ export const PaginatedTable: React.FC<PaginatedTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {paginatedData.map((row, rowIndex) => (
+          {data.map((row, rowIndex) => (
             <tr key={rowIndex} className="border-t">
               {columns.map((col) => (
                 <td key={col.key} className="border px-4 py-2">

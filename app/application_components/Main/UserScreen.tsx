@@ -19,7 +19,7 @@ export const UserScreen = () => {
     if (data.event === "task_submission") {
       toast("A new task has been submitted. Please refresh the page.", {
         duration: 5000,
-        position:"bottom-center",
+        position: "bottom-center",
         icon: "🚀",
       });
       invalidateCurrentPage();
@@ -57,7 +57,6 @@ export const UserScreen = () => {
     );
   }
 
-  const tasks = data?.tasks || [];
   const columns = [
     { key: "name", label: "Name" },
     { key: "socialMediaHandle", label: "Social Media" },
@@ -79,14 +78,18 @@ export const UserScreen = () => {
     <div className="container mx-auto px-4 py-8">
       <TaskFormDropdown invalidateCurrentPage={invalidateCurrentPage} />
       <h1 className="text-2xl font-bold mb-4">Created Tasks</h1>
-      <PaginatedTable
-        data={tasks}
-        totalPages={data.totalPages}
-        columns={columns}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        pageSize={pageSize}
-      />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <PaginatedTable
+          data={data?.tasks}
+          totalPages={data.totalPages}
+          columns={columns}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          pageSize={pageSize}
+        />
+      )}
     </div>
   );
 };
